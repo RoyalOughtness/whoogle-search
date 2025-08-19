@@ -198,7 +198,7 @@ def get_site_alt(link: str, site_alts: dict = SITE_ALTS) -> str:
     # "https://medium.com/..." should match, but "philomedium.com" should not)
     hostcomp = f'{parsed_link.scheme}://{hostname}'
 
-    site_key = get_matching_key(hostcomp, parsed_link.scheme, link, site_alts)
+    site_key = get_matching_key(hostcomp, parsed_link.scheme, link, frozenset(site_alts))
 
     if site_key is None:
       return link
@@ -238,7 +238,7 @@ def get_site_alt(link: str, site_alts: dict = SITE_ALTS) -> str:
     return link
 
 @cache
-def get_matching_key(hostcomp: str, scheme: str, link: str, site_alts: dict) -> str | None:
+def get_matching_key(hostcomp: str, scheme: str, link: str, site_alts: FrozenSet[Tuple[str, str]]) -> str | None:
     for site_key in site_alts.keys():
       site_alt = f'{scheme}://{site_key}'
 
