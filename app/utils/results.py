@@ -11,6 +11,7 @@ from urllib.parse import parse_qs
 import re
 import warnings
 from functools import cache
+from typing import FrozenSet, Tuple
 
 SKIP_ARGS = ['ref_src', 'utm']
 SKIP_PREFIX = ['//www.', '//mobile.', '//m.']
