@@ -240,14 +240,14 @@ def get_site_alt(link: str, site_alts: dict = SITE_ALTS) -> str:
 
 @cache
 def get_matching_key(hostcomp: str, scheme: str, link: str, site_alts: FrozenSet[Tuple[str, str]]) -> str | None:
-    for site_key, _ in site_alts:
+    for site_key, site_value in site_alts:
       site_alt = f'{scheme}://{site_key}'
 
       # If an site alt is already present in the link, skip updating it
-      if site_alts[site_key] in link:
+      if site_value in link:
           return None
 
-      if site_alt in hostcomp and site_alts[site_key]:
+      if site_alt in hostcomp and site_value:
           return site_key
 
 
