@@ -1,25 +1,22 @@
 name: buildx
 
 on:
-  workflow_run:
-    workflows: ["docker_main"]
-    branches: [live]
-    types:
-      - completed
-  push:
-    tags:
-      - '*'
+  workflow_dispatch:
+
+permissions: {}
 
 jobs:
   on-success:
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
     steps:
-      - name: Wait for tests to succeed
-        if: ${{ github.event.workflow_run.conclusion != 'success' && startsWith(github.ref, 'refs/tags') != true }}
-        run: exit 1
-
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
+        with:
+          persist-credentials: false
+          
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3.11.1
 

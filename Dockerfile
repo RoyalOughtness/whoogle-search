@@ -97,6 +97,9 @@ USER $DOCKER_USER:$DOCKER_USER
 
 EXPOSE $EXPOSE_PORT
 
+COPY --from=ghcr.io/polarix-containers/hardened_malloc:latest /install /usr/local/lib/
+ENV LD_PRELOAD="/usr/local/lib/libhardened_malloc.so"
+
 HEALTHCHECK --interval=30s --timeout=5s \
   CMD curl -f http://localhost:${EXPOSE_PORT}/healthz || exit 1
 
