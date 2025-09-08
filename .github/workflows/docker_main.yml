@@ -1,11 +1,7 @@
 name: docker_main
 
 on:
-  workflow_run:
-    workflows: ["tests"]
-    branches: [live]
-    types:
-      - completed
+  workflow_dispatch:
 
 
 permissions: {}
