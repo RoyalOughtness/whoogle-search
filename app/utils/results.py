@@ -10,6 +10,7 @@ import urllib.parse as urlparse
 from urllib.parse import parse_qs
 import re
 import warnings
+from functools import cache
 
 SKIP_ARGS = ['ref_src', 'utm']
 SKIP_PREFIX = ['//www.', '//mobile.', '//m.']
@@ -239,6 +240,8 @@ def get_site_alt(link: str, site_alts: dict = SITE_ALTS) -> str:
         break
 
     return link
+
+
 
 
 def filter_link_args(link: str) -> str:
